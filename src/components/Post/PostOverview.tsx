@@ -1,19 +1,38 @@
 import React from "react"
-import { Link } from "gatsby"
+import { Link as GatsbyLink } from "gatsby"
+import { RemarkEdge } from "../../types"
+import { Link, makeStyles, Typography } from "@material-ui/core"
+
+const useStyles = makeStyles(theme => ({
+  title: {
+    marginBottom: theme.spacing(2),
+  },
+  date: {
+    marginBottom: theme.spacing(1),
+    fontWeight: 500,
+  },
+  body: {},
+}))
 
 interface PostOverviewProps {
-  edge: any
+  edge: RemarkEdge
 }
 
 export const PostOverview: React.FC<PostOverviewProps> = ({ edge }) => {
+  const classes = useStyles()
   return (
-    <div key={edge.node.id}>
-      <h3>
-        <Link to={edge.node.frontmatter.path}>
+    <div>
+      <Typography className={classes.title} variant={"h4"}>
+        <Link component={GatsbyLink} to={edge.node.frontmatter.path}>
           {edge.node.frontmatter.title}
         </Link>
-      </h3>
-      <p>{edge.node.excerpt}</p>
+      </Typography>
+      <Typography className={classes.date} variant={"subtitle1"}>
+        {edge.node.frontmatter.date}
+      </Typography>
+      <Typography className={classes.body} variant={"body1"} paragraph>
+        {edge.node.excerpt}
+      </Typography>
     </div>
   )
 }
