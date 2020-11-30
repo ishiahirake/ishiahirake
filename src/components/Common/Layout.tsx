@@ -8,12 +8,22 @@
 import React from "react"
 import { useStaticQuery, graphql } from "gatsby"
 
-import { Header } from "./Header"
 import "./layout.css"
+
+import { Header } from "./Header"
+import { Container, makeStyles } from "@material-ui/core"
+
+const useStyles = makeStyles(theme => ({
+  main: {
+    marginTop: theme.spacing(4),
+  },
+}))
 
 interface LayoutProps {}
 
 export const Layout: React.FC<LayoutProps> = ({ children }) => {
+  const classes = useStyles()
+
   const data = useStaticQuery(graphql`
     query SiteTitleQuery {
       site {
@@ -27,14 +37,8 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (
     <>
       <Header siteTitle={data.site.siteMetadata?.title || `Title`} />
-      <div
-        style={{
-          margin: `0 auto`,
-          maxWidth: 960,
-          padding: `0 1.0875rem 1.45rem`,
-        }}
-      >
-        <main>{children}</main>
+      <Container>
+        <main className={classes.main}>{children}</main>
         <footer
           style={{
             marginTop: `2rem`,
@@ -44,7 +48,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
           {` `}
           <a href="https://www.gatsbyjs.com">Gatsby</a>
         </footer>
-      </div>
+      </Container>
     </>
   )
 }
