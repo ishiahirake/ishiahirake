@@ -1,0 +1,10 @@
+{
+  "cSpell.words": [
+    "clsx",
+    "typecheck"
+  ],
+  "files.readonlyInclude": {
+    "**/yarn.lock": true,
+    "**/node_modules/**": true,
+  },
+}
