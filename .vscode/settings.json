@@ -5,6 +5,7 @@
   ],
   "files.readonlyInclude": {
     "**/yarn.lock": true,
+    "**/.yarn/**": true,
     "**/node_modules/**": true,
   },
 }
